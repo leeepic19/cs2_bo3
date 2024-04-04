@@ -1,0 +1,132 @@
+
+#include <iostream>
+using namespace std;
+struct mapS{
+    string name;
+    int isPick;
+    string team;
+    int isCt;
+};
+
+
+
+int main(){
+    struct mapS arr[7];
+    arr[0].name = "沙漠二";
+    arr[1].name = "炼狱小镇";
+    arr[2].name = "荒漠迷城";
+    arr[3].name = "核子危机";
+    arr[4].name = "远古遗迹";
+    arr[5].name = "殒命大厦";
+    arr[6].name = "阿努比斯";
+    
+    arr[0].isPick = 1;
+    arr[1].isPick = 1;
+    arr[2].isPick = 1;
+    arr[3].isPick = 1;
+    arr[4].isPick = 1;
+    arr[5].isPick = 1;
+    arr[6].isPick = 1;
+    
+    arr[0].isCt = -1;
+    arr[1].isCt = -1;
+    arr[2].isCt = -1;
+    arr[3].isCt = -1;
+    arr[4].isCt = -1;
+    arr[5].isCt = -1;
+    arr[6].isCt = -1;
+
+    //show menu
+    cout << "1 沙漠二 " << endl;
+    cout << "2 炼狱小镇 " << endl;
+    cout << "3 荒漠迷城 " << endl;
+    cout << "4 核子危机 " << endl;
+    cout << "5 远古遗迹 " << endl;
+    cout << "6 殒命大厦 " << endl;
+    cout << "7 阿努比斯 " << endl;
+
+
+
+    int firstBan;
+    cout << "A方禁用一张地图" << endl;
+    cin >> firstBan;
+    arr[firstBan-1].isPick = 0;
+    cout << "已禁用" << arr[firstBan-1].name << endl;
+    
+    cout << "B方禁用一张地图" << endl;
+    int secBan;
+    cin >> secBan;
+    arr[secBan-1].isPick = 0;
+    cout << "已禁用" << arr[secBan-1].name << endl;
+
+    
+    //A方一图
+    int firstPick;
+    cout << "A方选用一张地图" << endl;
+    cin >> firstPick;
+    arr[firstPick-1].isPick = 1;
+    cout << "已选中" << arr[firstPick-1].name << endl;
+    
+    int ctPick_1;
+    cout << "B方选择该图是否警开" << endl;
+    cin >> ctPick_1;
+    arr[firstPick-1].team = "B";
+    arr[firstPick-1].isCt = ctPick_1;
+    
+    //B方一图
+    int secPick;
+    cout << "B方选用一张地图" << endl;
+    cin >> secPick;
+    arr[secPick-1].isPick = 1;
+    cout << "已选中" << arr[secPick-1].name << endl;
+    
+    int ctPick_2;
+    cout << "A方选择该图是否警开" << endl;
+    cin >> ctPick_2;
+    arr[secPick-1].team = "A";
+    arr[secPick-1].isCt = ctPick_2;
+    
+    //B方二ban
+    cout << "B方禁用一张地图" << endl;
+    int thirdBan;
+    cin >> thirdBan;
+    arr[thirdBan-1].isPick = 0;
+    cout << "已禁用" << arr[thirdBan-1].name << endl;
+
+    
+    //A方二ban
+    cout << "A方禁用一张地图" << endl;
+    int forthBan;
+    cin >> forthBan;
+    arr[forthBan-1].isPick = 0;
+    cout << "已禁用" << arr[forthBan-1].name << endl;
+
+    
+    //图三B方选边
+    for(int i = 0 ; i < 7 ; i++){
+        if(arr[i].isPick == 1 && arr[i].isCt == -1){
+            cout << "剩余地图为" << arr[i].name << endl;
+            int ctPick_3;
+            cout << "B方选择该图是否警开" << endl;
+            cin >> ctPick_3;
+            arr[i].team = "B";
+            arr[i].isCt = ctPick_3;
+        }
+    }
+    
+    //输出结果
+    int k = 1;
+    for(int i = 0 ; i < 7 ; i++){
+        if(arr[i].isPick == 1){
+            cout << "图" << k << arr[i].name << " " << arr[i].team << "选择";
+            if(arr[i].isCt == 1) cout << "警开" << endl;
+            else cout << "匪开" << endl;
+            k++;
+        }
+    }
+    
+    
+    
+    
+    return 0;
+}
